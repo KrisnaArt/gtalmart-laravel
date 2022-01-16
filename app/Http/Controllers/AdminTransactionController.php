@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminTransactionController extends Controller
 {
@@ -14,7 +16,9 @@ class AdminTransactionController extends Controller
      */
     public function index()
     {
-        return view('dashboard.transaction.index');
+        return view('dashboardAdmin.transaction.index', [
+            'transactions' => Transaction::all()
+        ]);
     }
 
     /**
@@ -57,7 +61,11 @@ class AdminTransactionController extends Controller
      */
     public function edit(Transaction $transaction)
     {
-        //
+        $category = [['id'=>1,'name' => 'Transaksi Berhasil', 'value' => 'Transaksi Berhasil'], ['id'=>2,'name' => 'Transaksi Gagal', 'value' => 'Transaksi Gagal']];
+        return view('dashboardAdmin.transaction.edit', [
+            'transaction' => $transaction,
+            'categories' => $category
+        ]);
     }
 
     /**
@@ -69,7 +77,17 @@ class AdminTransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
-        //
+        $rules = [
+            'no_invoice' => 'required',
+            'status' => 'required'
+        ];
+
+        $validateData = $request->validate($rules);
+
+        Transaction::where('id',$transaction->id)
+            ->update($validateData);
+
+        return redirect('/dashboardAdmin/transactions')->with('suscess','product added');
     }
 
     /**

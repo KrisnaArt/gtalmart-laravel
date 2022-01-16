@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class AdminProductController extends Controller
 {
@@ -14,7 +17,9 @@ class AdminProductController extends Controller
      */
     public function index()
     {
-        return view('dashboard.products.index');
+        return view('dashboardAdmin.products.index', [
+            'products' => Product::all()
+        ]);
     }
 
     /**
@@ -24,7 +29,9 @@ class AdminProductController extends Controller
      */
     public function create()
     {
-        return view('dashboard.products.create');
+        return view('dashboardAdmin.products.create',[
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -35,7 +42,25 @@ class AdminProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'name' => 'required',
+            'category_id'=> 'required',
+            'slug' => 'required|unique:products',
+            'link' => 'required',
+            'image' => 'image',
+            'description' => 'required',
+            'price' => 'required'
+        ]);
+
+        if($request->file('image')){
+            $validateData['image'] = $request->file('image')->store('product-images');
+        }
+
+        $validateData['excerpt'] = Str::limit(strip_tags($request->description), 20);
+
+        Product::create($validateData);
+
+        return redirect('/dashboardAdmin/products')->with('suscess','product added');
     }
 
     /**
@@ -57,7 +82,10 @@ class AdminProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('dashboardAdmin.products.edit',[
+            'product' => $product,
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -69,7 +97,31 @@ class AdminProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        return view('dashboard.products.update');
+        $rules = [
+            'name' => 'required',
+            'category_id'=> 'required',
+            'link' => 'required',
+            'image' => 'image',
+            'description' => 'required',
+            'price' => 'required'
+        ];
+
+        if($request->slug != $product->slug){
+            $rules['slug'] = 'required|unique:products';
+        }
+
+        $validateData = $request->validate($rules);
+
+        if($request->file('image')){
+            $validateData['image'] = $request->file('image')->store('product-images');
+        }
+
+        $validateData['excerpt'] = Str::limit(strip_tags($request->description), 20);
+
+        Product::where('id',$product->id)
+            ->update($validateData);
+
+        return redirect('/dashboardAdmin/products')->with('suscess','product added');
     }
 
     /**
@@ -80,6 +132,13 @@ class AdminProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        Product::destroy($product->id);
+        return redirect('/dashboardAdmin/products')->with('suscess','product adeleted');
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(Product::class, 'slug', $request->name);
+        return response()->json(['slug' => $slug]);
     }
 }

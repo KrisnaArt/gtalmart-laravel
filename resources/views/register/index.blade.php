@@ -52,18 +52,18 @@
             <div class="col-lg-5">
               <div class="card bg-secondary shadow border-0">
                 <div class="card-header bg-white pb-5">
-                  <div class="text-muted text-center mb-3"><small>Sign up with</small></div>
-                  <div class="text-center">
+                  <div class="text-muted text-center mb-3"><h5>Sign Up</h5></div>
+                  {{-- <div class="text-center">
                     <a href="#" class="btn btn-neutral btn-icon">
                       <span class="btn-inner--icon"><i class="fab fa-google"></i></span>
                       <span class="btn-inner--text">Google</span>
                     </a>
-                  </div>
+                  </div> --}}
                 </div>
                 <div class="card-body px-lg-5 py-lg-5">
-                  <div class="text-center text-muted mb-4">
+                  {{-- <div class="text-center text-muted mb-4">
                     <small>Or sign up with credentials</small>
-                  </div>
+                  </div> --}}
                   <form action="/register" method="post">
                     @csrf
                     <div class="form-floating">

@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
-use App\Models\Product;
+use App\Models\Cart;
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Transaction;
+use App\Models\Whislist;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,10 +22,31 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         User::create([
-            'name' => 'krisna',
-            'email' => 'krisna@test.com',
-            'password' => '12345678',
-            'is_admin' => true
+            'name' => 'admin1',
+            'email' => 'admin1@test.com',
+            'password' => bcrypt('12345678'),
+            'is_admin' => 1,
+        ]);
+
+        User::create([
+            'name' => 'user1',
+            'email' => 'user1@test.com',
+            'password' => bcrypt('12345678'),
+            'is_admin' => 0,
+        ]);
+
+        User::create([
+            'name' => 'user2',
+            'email' => 'user2@test.com',
+            'password' => bcrypt('12345678'),
+            'is_admin' => 0,
+        ]);
+
+        User::create([
+            'name' => 'user3',
+            'email' => 'user3@test.com',
+            'password' => bcrypt('12345678'),
+            'is_admin' => 0,
         ]);
 
         Product::create([
@@ -31,7 +55,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'buku-ipa',
             'link' => 'https://example.com/users/buku-ipa',
             'image' => 'img/products/ebookedu/ipa.jpg',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto officiis error qui velit facere reiciendis, a, ad, quam ipsam ullam ducimus amet illo inventore quisquam quo possimus quaerat molestiae numquam.',
+            'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem ad ratione incidunt rem quia mollitia ut atque labore quisquam.',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia blanditiis ut ab hic quasi doloribus natus nobis! Quidem mollitia exercitationem corrupti qui cumque sequi ducimus voluptate sapiente eveniet impedit aspernatur dolores pariatur odio aliquam cupiditate assumenda expedita tempora hic accusamus rerum, itaque recusandae laboriosam? Voluptas provident dignissimos numquam in sit accusamus ullam, debitis libero facere quae, necessitatibus, possimus quibusdam iste. Commodi itaque ducimus, doloribus tempora repellendus necessitatibus optio consequuntur dolores in quisquam tempore explicabo. Alias non suscipit recusandae animi similique facilis culpa, possimus neque, laudantium rem nam veniam sunt tempore cupiditate deserunt adipisci! Voluptatem nihil porro aspernatur, adipisci doloribus similique.',
             'price' => '52000'
         ]);
 
@@ -41,7 +66,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'komputer-jaringan',
             'link' => 'https://example.com/users/komputer-jaringan',
             'image' => 'img/products/ebookedu/komputer.jpg',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto officiis error qui velit facere reiciendis, a, ad, quam ipsam ullam ducimus amet illo inventore quisquam quo possimus quaerat molestiae numquam.',
+            'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem ad ratione incidunt rem quia mollitia ut atque labore quisquam.',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia blanditiis ut ab hic quasi doloribus natus nobis! Quidem mollitia exercitationem corrupti qui cumque sequi ducimus voluptate sapiente eveniet impedit aspernatur dolores pariatur odio aliquam cupiditate assumenda expedita tempora hic accusamus rerum, itaque recusandae laboriosam? Voluptas provident dignissimos numquam in sit accusamus ullam, debitis libero facere quae, necessitatibus, possimus quibusdam iste. Commodi itaque ducimus, doloribus tempora repellendus necessitatibus optio consequuntur dolores in quisquam tempore explicabo. Alias non suscipit recusandae animi similique facilis culpa, possimus neque, laudantium rem nam veniam sunt tempore cupiditate deserunt adipisci! Voluptatem nihil porro aspernatur, adipisci doloribus similique.',
             'price' => '60000'
         ]);
 
@@ -51,7 +77,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'matematika-diskrit',
             'link' => 'https://example.com/users/matematika-diskrit',
             'image' => 'img/products/ebookedu/mm.jpg',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto officiis error qui velit facere reiciendis, a, ad, quam ipsam ullam ducimus amet illo inventore quisquam quo possimus quaerat molestiae numquam.',
+            'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem ad ratione incidunt rem quia mollitia ut atque labore quisquam.',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia blanditiis ut ab hic quasi doloribus natus nobis! Quidem mollitia exercitationem corrupti qui cumque sequi ducimus voluptate sapiente eveniet impedit aspernatur dolores pariatur odio aliquam cupiditate assumenda expedita tempora hic accusamus rerum, itaque recusandae laboriosam? Voluptas provident dignissimos numquam in sit accusamus ullam, debitis libero facere quae, necessitatibus, possimus quibusdam iste. Commodi itaque ducimus, doloribus tempora repellendus necessitatibus optio consequuntur dolores in quisquam tempore explicabo. Alias non suscipit recusandae animi similique facilis culpa, possimus neque, laudantium rem nam veniam sunt tempore cupiditate deserunt adipisci! Voluptatem nihil porro aspernatur, adipisci doloribus similique.',
             'price' => '45000'
         ]);
 
@@ -61,7 +88,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'conan',
             'link' => 'https://example.com/users/conan',
             'image' => 'img/products/ebookcom/conan.jpg',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto officiis error qui velit facere reiciendis, a, ad, quam ipsam ullam ducimus amet illo inventore quisquam quo possimus quaerat molestiae numquam.',
+            'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem ad ratione incidunt rem quia mollitia ut atque labore quisquam.',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia blanditiis ut ab hic quasi doloribus natus nobis! Quidem mollitia exercitationem corrupti qui cumque sequi ducimus voluptate sapiente eveniet impedit aspernatur dolores pariatur odio aliquam cupiditate assumenda expedita tempora hic accusamus rerum, itaque recusandae laboriosam? Voluptas provident dignissimos numquam in sit accusamus ullam, debitis libero facere quae, necessitatibus, possimus quibusdam iste. Commodi itaque ducimus, doloribus tempora repellendus necessitatibus optio consequuntur dolores in quisquam tempore explicabo. Alias non suscipit recusandae animi similique facilis culpa, possimus neque, laudantium rem nam veniam sunt tempore cupiditate deserunt adipisci! Voluptatem nihil porro aspernatur, adipisci doloribus similique.',
             'price' => '32000'
         ]);
 
@@ -71,7 +99,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'one-piece',
             'link' => 'https://example.com/users/one-piece',
             'image' => 'img/products/ebookcom/op.jpg',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto officiis error qui velit facere reiciendis, a, ad, quam ipsam ullam ducimus amet illo inventore quisquam quo possimus quaerat molestiae numquam.',
+            'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem ad ratione incidunt rem quia mollitia ut atque labore quisquam.',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia blanditiis ut ab hic quasi doloribus natus nobis! Quidem mollitia exercitationem corrupti qui cumque sequi ducimus voluptate sapiente eveniet impedit aspernatur dolores pariatur odio aliquam cupiditate assumenda expedita tempora hic accusamus rerum, itaque recusandae laboriosam? Voluptas provident dignissimos numquam in sit accusamus ullam, debitis libero facere quae, necessitatibus, possimus quibusdam iste. Commodi itaque ducimus, doloribus tempora repellendus necessitatibus optio consequuntur dolores in quisquam tempore explicabo. Alias non suscipit recusandae animi similique facilis culpa, possimus neque, laudantium rem nam veniam sunt tempore cupiditate deserunt adipisci! Voluptatem nihil porro aspernatur, adipisci doloribus similique.',
             'price' => '22000'
         ]);
 
@@ -81,7 +110,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'naruto',
             'link' => 'https://example.com/users/naruto',
             'image' => 'img/products/ebookcom/naruto.jpg',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto officiis error qui velit facere reiciendis, a, ad, quam ipsam ullam ducimus amet illo inventore quisquam quo possimus quaerat molestiae numquam.',
+            'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem ad ratione incidunt rem quia mollitia ut atque labore quisquam.',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia blanditiis ut ab hic quasi doloribus natus nobis! Quidem mollitia exercitationem corrupti qui cumque sequi ducimus voluptate sapiente eveniet impedit aspernatur dolores pariatur odio aliquam cupiditate assumenda expedita tempora hic accusamus rerum, itaque recusandae laboriosam? Voluptas provident dignissimos numquam in sit accusamus ullam, debitis libero facere quae, necessitatibus, possimus quibusdam iste. Commodi itaque ducimus, doloribus tempora repellendus necessitatibus optio consequuntur dolores in quisquam tempore explicabo. Alias non suscipit recusandae animi similique facilis culpa, possimus neque, laudantium rem nam veniam sunt tempore cupiditate deserunt adipisci! Voluptatem nihil porro aspernatur, adipisci doloribus similique.',
             'price' => '27000'
         ]);
 
@@ -91,7 +121,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'f9',
             'link' => 'https://example.com/users/f9',
             'image' => 'img/products/film/f9.jpg',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto officiis error qui velit facere reiciendis, a, ad, quam ipsam ullam ducimus amet illo inventore quisquam quo possimus quaerat molestiae numquam.',
+            'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem ad ratione incidunt rem quia mollitia ut atque labore quisquam.',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia blanditiis ut ab hic quasi doloribus natus nobis! Quidem mollitia exercitationem corrupti qui cumque sequi ducimus voluptate sapiente eveniet impedit aspernatur dolores pariatur odio aliquam cupiditate assumenda expedita tempora hic accusamus rerum, itaque recusandae laboriosam? Voluptas provident dignissimos numquam in sit accusamus ullam, debitis libero facere quae, necessitatibus, possimus quibusdam iste. Commodi itaque ducimus, doloribus tempora repellendus necessitatibus optio consequuntur dolores in quisquam tempore explicabo. Alias non suscipit recusandae animi similique facilis culpa, possimus neque, laudantium rem nam veniam sunt tempore cupiditate deserunt adipisci! Voluptatem nihil porro aspernatur, adipisci doloribus similique.',
             'price' => '50000'
         ]);
 
@@ -101,7 +132,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'gotg',
             'link' => 'https://example.com/users/gotg',
             'image' => 'img/products/film/gotg.jpg',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto officiis error qui velit facere reiciendis, a, ad, quam ipsam ullam ducimus amet illo inventore quisquam quo possimus quaerat molestiae numquam.',
+            'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem ad ratione incidunt rem quia mollitia ut atque labore quisquam.',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia blanditiis ut ab hic quasi doloribus natus nobis! Quidem mollitia exercitationem corrupti qui cumque sequi ducimus voluptate sapiente eveniet impedit aspernatur dolores pariatur odio aliquam cupiditate assumenda expedita tempora hic accusamus rerum, itaque recusandae laboriosam? Voluptas provident dignissimos numquam in sit accusamus ullam, debitis libero facere quae, necessitatibus, possimus quibusdam iste. Commodi itaque ducimus, doloribus tempora repellendus necessitatibus optio consequuntur dolores in quisquam tempore explicabo. Alias non suscipit recusandae animi similique facilis culpa, possimus neque, laudantium rem nam veniam sunt tempore cupiditate deserunt adipisci! Voluptatem nihil porro aspernatur, adipisci doloribus similique.',
             'price' => '49000'
         ]);
 
@@ -111,7 +143,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'matrix',
             'link' => 'https://example.com/users/matrix',
             'image' => 'img/products/film/matrix.jpg',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto officiis error qui velit facere reiciendis, a, ad, quam ipsam ullam ducimus amet illo inventore quisquam quo possimus quaerat molestiae numquam.',
+            'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem ad ratione incidunt rem quia mollitia ut atque labore quisquam.',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia blanditiis ut ab hic quasi doloribus natus nobis! Quidem mollitia exercitationem corrupti qui cumque sequi ducimus voluptate sapiente eveniet impedit aspernatur dolores pariatur odio aliquam cupiditate assumenda expedita tempora hic accusamus rerum, itaque recusandae laboriosam? Voluptas provident dignissimos numquam in sit accusamus ullam, debitis libero facere quae, necessitatibus, possimus quibusdam iste. Commodi itaque ducimus, doloribus tempora repellendus necessitatibus optio consequuntur dolores in quisquam tempore explicabo. Alias non suscipit recusandae animi similique facilis culpa, possimus neque, laudantium rem nam veniam sunt tempore cupiditate deserunt adipisci! Voluptatem nihil porro aspernatur, adipisci doloribus similique.',
             'price' => '51000'
         ]);
 
@@ -121,7 +154,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'lr-mobile',
             'link' => 'https://example.com/users/lr-mobile',
             'image' => 'img/products/androidapp/lr.jpg',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto officiis error qui velit facere reiciendis, a, ad, quam ipsam ullam ducimus amet illo inventore quisquam quo possimus quaerat molestiae numquam.',
+            'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem ad ratione incidunt rem quia mollitia ut atque labore quisquam.',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia blanditiis ut ab hic quasi doloribus natus nobis! Quidem mollitia exercitationem corrupti qui cumque sequi ducimus voluptate sapiente eveniet impedit aspernatur dolores pariatur odio aliquam cupiditate assumenda expedita tempora hic accusamus rerum, itaque recusandae laboriosam? Voluptas provident dignissimos numquam in sit accusamus ullam, debitis libero facere quae, necessitatibus, possimus quibusdam iste. Commodi itaque ducimus, doloribus tempora repellendus necessitatibus optio consequuntur dolores in quisquam tempore explicabo. Alias non suscipit recusandae animi similique facilis culpa, possimus neque, laudantium rem nam veniam sunt tempore cupiditate deserunt adipisci! Voluptatem nihil porro aspernatur, adipisci doloribus similique.',
             'price' => '27000'
         ]);
 
@@ -131,7 +165,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'capcut',
             'link' => 'https://example.com/users/capcut',
             'image' => 'img/products/androidapp/capcut.jpg',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto officiis error qui velit facere reiciendis, a, ad, quam ipsam ullam ducimus amet illo inventore quisquam quo possimus quaerat molestiae numquam.',
+            'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem ad ratione incidunt rem quia mollitia ut atque labore quisquam.',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia blanditiis ut ab hic quasi doloribus natus nobis! Quidem mollitia exercitationem corrupti qui cumque sequi ducimus voluptate sapiente eveniet impedit aspernatur dolores pariatur odio aliquam cupiditate assumenda expedita tempora hic accusamus rerum, itaque recusandae laboriosam? Voluptas provident dignissimos numquam in sit accusamus ullam, debitis libero facere quae, necessitatibus, possimus quibusdam iste. Commodi itaque ducimus, doloribus tempora repellendus necessitatibus optio consequuntur dolores in quisquam tempore explicabo. Alias non suscipit recusandae animi similique facilis culpa, possimus neque, laudantium rem nam veniam sunt tempore cupiditate deserunt adipisci! Voluptatem nihil porro aspernatur, adipisci doloribus similique.',
             'price' => '30000'
         ]);
 
@@ -141,7 +176,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'pictsart',
             'link' => 'https://example.com/users/pictsart',
             'image' => 'img/products/androidapp/pictsart.jpg',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto officiis error qui velit facere reiciendis, a, ad, quam ipsam ullam ducimus amet illo inventore quisquam quo possimus quaerat molestiae numquam.',
+            'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem ad ratione incidunt rem quia mollitia ut atque labore quisquam.',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia blanditiis ut ab hic quasi doloribus natus nobis! Quidem mollitia exercitationem corrupti qui cumque sequi ducimus voluptate sapiente eveniet impedit aspernatur dolores pariatur odio aliquam cupiditate assumenda expedita tempora hic accusamus rerum, itaque recusandae laboriosam? Voluptas provident dignissimos numquam in sit accusamus ullam, debitis libero facere quae, necessitatibus, possimus quibusdam iste. Commodi itaque ducimus, doloribus tempora repellendus necessitatibus optio consequuntur dolores in quisquam tempore explicabo. Alias non suscipit recusandae animi similique facilis culpa, possimus neque, laudantium rem nam veniam sunt tempore cupiditate deserunt adipisci! Voluptatem nihil porro aspernatur, adipisci doloribus similique.',
             'price' => '33000'
         ]);
 
@@ -151,7 +187,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'idm',
             'link' => 'https://example.com/users/idm',
             'image' => 'img/products/softpc/idm.jpg',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto officiis error qui velit facere reiciendis, a, ad, quam ipsam ullam ducimus amet illo inventore quisquam quo possimus quaerat molestiae numquam.',
+            'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem ad ratione incidunt rem quia mollitia ut atque labore quisquam.',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia blanditiis ut ab hic quasi doloribus natus nobis! Quidem mollitia exercitationem corrupti qui cumque sequi ducimus voluptate sapiente eveniet impedit aspernatur dolores pariatur odio aliquam cupiditate assumenda expedita tempora hic accusamus rerum, itaque recusandae laboriosam? Voluptas provident dignissimos numquam in sit accusamus ullam, debitis libero facere quae, necessitatibus, possimus quibusdam iste. Commodi itaque ducimus, doloribus tempora repellendus necessitatibus optio consequuntur dolores in quisquam tempore explicabo. Alias non suscipit recusandae animi similique facilis culpa, possimus neque, laudantium rem nam veniam sunt tempore cupiditate deserunt adipisci! Voluptatem nihil porro aspernatur, adipisci doloribus similique.',
             'price' => '20000'
         ]);
 
@@ -161,7 +198,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'ps',
             'link' => 'https://example.com/users/ps',
             'image' => 'img/products/softpc/ps.jpg',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto officiis error qui velit facere reiciendis, a, ad, quam ipsam ullam ducimus amet illo inventore quisquam quo possimus quaerat molestiae numquam.',
+            'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem ad ratione incidunt rem quia mollitia ut atque labore quisquam.',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia blanditiis ut ab hic quasi doloribus natus nobis! Quidem mollitia exercitationem corrupti qui cumque sequi ducimus voluptate sapiente eveniet impedit aspernatur dolores pariatur odio aliquam cupiditate assumenda expedita tempora hic accusamus rerum, itaque recusandae laboriosam? Voluptas provident dignissimos numquam in sit accusamus ullam, debitis libero facere quae, necessitatibus, possimus quibusdam iste. Commodi itaque ducimus, doloribus tempora repellendus necessitatibus optio consequuntur dolores in quisquam tempore explicabo. Alias non suscipit recusandae animi similique facilis culpa, possimus neque, laudantium rem nam veniam sunt tempore cupiditate deserunt adipisci! Voluptatem nihil porro aspernatur, adipisci doloribus similique.',
             'price' => '22000'
         ]);
 
@@ -171,7 +209,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'office',
             'link' => 'https://example.com/users/office',
             'image' => 'img/products/softpc/office.jpg',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto officiis error qui velit facere reiciendis, a, ad, quam ipsam ullam ducimus amet illo inventore quisquam quo possimus quaerat molestiae numquam.',
+            'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem ad ratione incidunt rem quia mollitia ut atque labore quisquam.',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia blanditiis ut ab hic quasi doloribus natus nobis! Quidem mollitia exercitationem corrupti qui cumque sequi ducimus voluptate sapiente eveniet impedit aspernatur dolores pariatur odio aliquam cupiditate assumenda expedita tempora hic accusamus rerum, itaque recusandae laboriosam? Voluptas provident dignissimos numquam in sit accusamus ullam, debitis libero facere quae, necessitatibus, possimus quibusdam iste. Commodi itaque ducimus, doloribus tempora repellendus necessitatibus optio consequuntur dolores in quisquam tempore explicabo. Alias non suscipit recusandae animi similique facilis culpa, possimus neque, laudantium rem nam veniam sunt tempore cupiditate deserunt adipisci! Voluptatem nihil porro aspernatur, adipisci doloribus similique.',
             'price' => '26000'
         ]);
 
@@ -181,7 +220,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'voucher-ml',
             'link' => 'https://example.com/users/voucher-ml',
             'image' => 'img/products/softpc/ml.jpg',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto officiis error qui velit facere reiciendis, a, ad, quam ipsam ullam ducimus amet illo inventore quisquam quo possimus quaerat molestiae numquam.',
+            'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem ad ratione incidunt rem quia mollitia ut atque labore quisquam.',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia blanditiis ut ab hic quasi doloribus natus nobis! Quidem mollitia exercitationem corrupti qui cumque sequi ducimus voluptate sapiente eveniet impedit aspernatur dolores pariatur odio aliquam cupiditate assumenda expedita tempora hic accusamus rerum, itaque recusandae laboriosam? Voluptas provident dignissimos numquam in sit accusamus ullam, debitis libero facere quae, necessitatibus, possimus quibusdam iste. Commodi itaque ducimus, doloribus tempora repellendus necessitatibus optio consequuntur dolores in quisquam tempore explicabo. Alias non suscipit recusandae animi similique facilis culpa, possimus neque, laudantium rem nam veniam sunt tempore cupiditate deserunt adipisci! Voluptatem nihil porro aspernatur, adipisci doloribus similique.',
             'price' => '20000'
         ]);
 
@@ -191,7 +231,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'voucher-steam',
             'link' => 'https://example.com/users/voucher-steam',
             'image' => 'img/products/softpc/steam.jpg',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto officiis error qui velit facere reiciendis, a, ad, quam ipsam ullam ducimus amet illo inventore quisquam quo possimus quaerat molestiae numquam.',
+            'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem ad ratione incidunt rem quia mollitia ut atque labore quisquam.',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia blanditiis ut ab hic quasi doloribus natus nobis! Quidem mollitia exercitationem corrupti qui cumque sequi ducimus voluptate sapiente eveniet impedit aspernatur dolores pariatur odio aliquam cupiditate assumenda expedita tempora hic accusamus rerum, itaque recusandae laboriosam? Voluptas provident dignissimos numquam in sit accusamus ullam, debitis libero facere quae, necessitatibus, possimus quibusdam iste. Commodi itaque ducimus, doloribus tempora repellendus necessitatibus optio consequuntur dolores in quisquam tempore explicabo. Alias non suscipit recusandae animi similique facilis culpa, possimus neque, laudantium rem nam veniam sunt tempore cupiditate deserunt adipisci! Voluptatem nihil porro aspernatur, adipisci doloribus similique.',
             'price' => '20000'
         ]);
 
@@ -201,7 +242,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'voucher-pb',
             'link' => 'https://example.com/users/voucher-pb',
             'image' => 'img/products/softpc/pb.jpg',
-            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto officiis error qui velit facere reiciendis, a, ad, quam ipsam ullam ducimus amet illo inventore quisquam quo possimus quaerat molestiae numquam.',
+            'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolorem ad ratione incidunt rem quia mollitia ut atque labore quisquam.',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia blanditiis ut ab hic quasi doloribus natus nobis! Quidem mollitia exercitationem corrupti qui cumque sequi ducimus voluptate sapiente eveniet impedit aspernatur dolores pariatur odio aliquam cupiditate assumenda expedita tempora hic accusamus rerum, itaque recusandae laboriosam? Voluptas provident dignissimos numquam in sit accusamus ullam, debitis libero facere quae, necessitatibus, possimus quibusdam iste. Commodi itaque ducimus, doloribus tempora repellendus necessitatibus optio consequuntur dolores in quisquam tempore explicabo. Alias non suscipit recusandae animi similique facilis culpa, possimus neque, laudantium rem nam veniam sunt tempore cupiditate deserunt adipisci! Voluptatem nihil porro aspernatur, adipisci doloribus similique.',
             'price' => '20000'
         ]);
 
@@ -234,5 +276,47 @@ class DatabaseSeeder extends Seeder
             'name' => 'Voucher Game',
             'slug' => 'voucher-game'
         ]);
+
+        Transaction::create([
+            'product_id' => 3,
+            'user_id' => 2,
+            'no_invoice' => 'EDU-001',
+            'status' => 'Transaksi Berhasil'
+        ]);
+
+        Transaction::create([
+            'product_id' => 3,
+            'user_id' => 3,
+            'no_invoice' => 'EDU-002',
+            'status' => 'Transaksi Berhasil'
+        ]);
+
+        Transaction::create([
+            'product_id' => 5,
+            'user_id' => 2,
+            'no_invoice' => 'COM-001',
+            'status' => 'Transaksi Berhasil'
+        ]);
+
+        Cart::create([
+            'product_id' => 5,
+            'user_id' => 2,
+        ]);
+
+        Cart::create([
+            'product_id' => 7,
+            'user_id' => 2,
+        ]);
+
+        Whislist::create([
+            'product_id' => 5,
+            'user_id' => 2,
+        ]);
+
+        Whislist::create([
+            'product_id' => 7,
+            'user_id' => 2,
+        ]);
+
     }
 }

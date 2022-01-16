@@ -13,18 +13,18 @@
         rel="stylesheet">
 
     <!-- Icons -->
-    <link href="css/nucleo-icons.css" rel="stylesheet">
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <link href="css/fontawesome/css/all.min.css" rel="stylesheet">
+    <link href="{{ asset('css/nucleo-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fontawesome/css/all.min.css') }}" rel="stylesheet">
 
     <!-- Jquery UI -->
-    <link href="css/jquery-ui.css" rel="stylesheet">
+    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
 
     <!-- Argon CSS -->
-    <link href="css/argon-design-system.min.css" rel="stylesheet">
+    <link href="{{ asset('css/argon-design-system.min.css') }}" rel="stylesheet">
 
     <!-- Main CSS-->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <!-- Optional Plugins-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -36,7 +36,8 @@
         <div class="container">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Products</li>
+                <li class="breadcrumb-item"><a href="/products">Product</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ $category_data->name }}</li>
             </ol>
         </div>
     </section>
@@ -71,8 +72,7 @@
                                 <ul>
                                     @foreach ($categories as $category)
                                         <li>
-                                            <a
-                                                href="/products-category/{{ $category->slug }}">{{ $category->name }}</a>
+                                            <a href="/products-category/{{ $category->slug }}">{{ $category->name }}</a>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -85,13 +85,9 @@
                         <div class="col-12">
                             <div class="products-top">
                                 <div class="products-top-inner">
-                                    @if (request(['search']) != null)
-                                        <div class="products-found">
-                                            <p><span>{{ $product_found }}</span> products found </p>
-                                        </div>
-                                    @else
-
-                                    @endif
+                                    <div class="products-found">
+                                        <p><span>{{ $product_category }}</span> products found </p>
+                                    </div>
                                     <div class="products-sort">
                                         <form method="post" action="{{ URL::current() }}">
                                             @csrf
@@ -141,23 +137,21 @@
             </div>
         </div>
     </section>
-
     @include('partials.footer')
-
     <!-- Core -->
-    <script src="js/core/jquery.min.js"></script>
-    <script src="js/core/popper.min.js"></script>
-    <script src="js/core/bootstrap.min.js"></script>
-    <script src="js/core/jquery-ui.min.js"></script>
+    <script src="{{ asset('js/core/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/core/jquery-ui.min.js') }}"></script>
 
     <!-- Optional plugins -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <!-- Argon JS -->
-    <script src="js/argon-design-system.js"></script>
+    <script src="{{ asset('js/argon-design-system.js') }}"></script>
 
     <!-- Main JS-->
-    <script src="js/main.js"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
 </body>
 
 </html>
