@@ -35,6 +35,8 @@
     <!------------------------------------------
     Page Header
     ------------------------------------------->
+    {{-- {{ ddd(isset($whislist->product_id)) }} --}}
+    {{-- {{ ddd($products) }} --}}
     <section class="breadcrumb-section pb-3 pt-3">
         <div class="container">
             <ol class="breadcrumb">
@@ -90,7 +92,6 @@
                             <p>{{ $products->excerpt }}</p>
                         </div>
                         <div class="product-select">
-
                             <div class="row">
                                 <div class="col-md-5">
                                     @auth
@@ -109,12 +110,12 @@
                                 </div>
                                 <div class="col-md-4">
                                     @auth
-                                        @if (URL::previous() == 'http://gtalmart-laravel.test/whislists') 
+                                        @if (isset($whislist->product_id))
                                             <form action="/whislists/{{ $whislist->id }}" method="post">
                                                 @method('delete')
                                                 @csrf
                                                 <button type="submit" class="btn btn-secondary"><span style="color:Red"><i
-                                                            class="fas fa-heart"></i></span></button>
+                                                            class="fas fa-heart fa-lg"></i></span></button>
                                             </form>
                                         @else
                                             <form action="/whislists" method="post">
@@ -124,7 +125,7 @@
                                                 <input type="hidden" value={{ $products->id }} id="product_id"
                                                     name="product_id">
                                                 <button type="submit" class="btn btn-secondary"><i
-                                                            class="fas fa-heart"></i></button>
+                                                        class="fas fa-heart fa-lg"></i></button>
                                             </form>
                                         @endif
                                     @endauth
@@ -156,7 +157,6 @@
                     </div>
                 </div>
             </div>
-            {{ ddd($whislist) }}
             <div class="row">
                 <div class="col-12">
                     <div class="product-details">

@@ -43,36 +43,34 @@
     <section class="products-grid pb-4 pt-4">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9 col-md-8 col-12">
-                    <div class="row">
-                        @foreach ($whislists as $whislist)
-                            <div class="col-lg-4 col-md-6 col-12">
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <a href="/products/{{ $whislist->product->slug }}">
-                                            @if ($whislist->product->image)
-                                                <div style="max-height: 400px;max-width: 400px; overflow: hidden;">
-                                                    <img src="{{ asset('storage/' . $whislist->product->image) }}"
-                                                        class="img-fluid" />
-                                                @else
-                                                    <img src="https://picsum.photos/200/300" class="img-fluid" />
-                                            @endif
-                                        </a>
-                                    </div>
-                                    <div class="product-content">
-                                        <h3><a href="/products/{{ $whislist->product->slug }}">{{ $whislist->product->name }}</a></h3>
-                                        <div class="product-price">
-                                            <span>@currency( $whislist->product->price )</span>
-                                        </div>
-                                    </div>
+                @foreach ($whislists as $whislist)
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="single-product">
+                            <div class="product-img">
+                                <a href="/products/{{ $whislist->product->slug }}">
+                                    @if ($whislist->product->image)
+                                        <div style="max-height: 400px;max-width: 400px; overflow: hidden;">
+                                            <img src="{{ asset('storage/' . $whislist->product->image) }}"
+                                                class="img-fluid" />
+                                        @else
+                                            <img src="https://picsum.photos/200/300" class="img-fluid" />
+                                    @endif
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <h3><a
+                                        href="/products/{{ $whislist->product->slug }}">{{ $whislist->product->name }}</a>
+                                </h3>
+                                <div class="product-price">
+                                    <span>@currency( $whislist->product->price )</span>
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        {{ $whislists->links() }}
-                    </div>
-                </div>
+                @endforeach
+            </div>
+            <div class="d-flex justify-content-center">
+                {{ $whislists->links() }}
             </div>
         </div>
     </section>

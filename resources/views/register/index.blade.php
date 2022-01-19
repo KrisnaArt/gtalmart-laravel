@@ -51,8 +51,8 @@
           <div class="row justify-content-center">
             <div class="col-lg-5">
               <div class="card bg-secondary shadow border-0">
-                <div class="card-header bg-white pb-5">
-                  <div class="text-muted text-center mb-3"><h5>Sign Up</h5></div>
+                <div class="card-header bg-white">
+                  <div class="text-muted text-center"><h5>Sign Up</h5></div>
                   {{-- <div class="text-center">
                     <a href="#" class="btn btn-neutral btn-icon">
                       <span class="btn-inner--icon"><i class="fab fa-google"></i></span>

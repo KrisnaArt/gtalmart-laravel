@@ -20,7 +20,7 @@
                         <td class="text-center">{{ $loop->iteration }}</td>
                         <td>{{ $transaction->product->name }}</td>
                         <td>
-                            <a href="{{ $transaction->product->link }}" class="btn btn-success btn-icon btn-sm ">Download</a>
+                            <a href="{{ $transaction->product->link }}" class="btn btn-success btn-icon btn-sm">Download</a>
                         </td>
                     </tr>
                     @endforeach

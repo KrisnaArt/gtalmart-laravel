@@ -58,7 +58,7 @@
                                     <th>Produk</th>
                                     <th>Category</th>
                                     <th>Harga</th>
-                                    <th>Actions </th>
+                                    <th class="text-center"> Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,25 +68,36 @@
                                         <td>{{ $cart->product->name }}</td>
                                         <td>{{ $cart->product->category->name }}</td>
                                         <td>@currency($cart->product->price)</td>
-                                        <td>
-                                            <form action="/checkout" method="post" class="d-inline">
-                                                @csrf
-                                                <input type="hidden" value={{ $cart->product->id }} id="product_id"
-                                                    name="product_id">
-                                                <input type="hidden" value={{ $cart->id }} id="cart"
-                                                    name="cart">
-                                                <button class="btn btn-success btn-icon btn-sm" type="submit">
-                                                    Buy Now
-                                                </button>
-                                            </form>
-                                            <form action="/carts/{{ $cart->id }}" method="post"
-                                                class="d-inline">
-                                                @method('delete')
-                                                @csrf
-                                                <button class="btn btn-danger btn-icon btn-sm" type="submit">
-                                                    Delete
-                                                </button>
-                                            </form>
+                                        <td class="text-center">
+                                            <div class="row justify-content-center">
+                                                <form action="/checkout" method="post" style="margin-right: 10px">
+                                                    @csrf
+                                                    <input type="hidden" value={{ $cart->product->id }}
+                                                        id="product_id" name="product_id">
+                                                    <input type="hidden" value={{ $cart->id }} id="cart"
+                                                        name="cart">
+                                                    <button class="btn btn-icon btn-primary btn-sm" type="submit">
+                                                        <span class="btn-inner--icon">
+                                                            <i class="fas fa-shopping-cart fa-2x"></i>
+                                                        </span>
+                                                    </button>
+                                                    {{-- <button class="btn btn-success btn-icon btn-sm" type="submit">
+                                                        Buy Now
+                                                    </button> --}}
+                                                </form>
+                                                <form action="/carts/{{ $cart->id }}" method="post">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="btn btn-icon btn-danger btn-sm" type="submit">
+                                                        <span class="btn-inner--icon">
+                                                            <i class="fas fa-trash fa-2x"></i>
+                                                        </span>
+                                                    </button>
+                                                    {{-- <button class="btn btn-danger btn-icon btn-sm" type="submit">
+                                                        Delete
+                                                    </button> --}}
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

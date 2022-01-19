@@ -34,7 +34,6 @@ Route::get('/', function () {
 });
 
 Route::get('/products', [ProductController::class, 'index']);
-Route::post('/products', [ProductController::class, 'index']);
 Route::get('/products/{product:slug}', [ProductController::class, 'show']);
 Route::post('/products/{product:slug}', [ProductController::class, 'show']);
 Route::get('/products-category/{category:slug}', [ProductController::class, 'categoryProduct']);

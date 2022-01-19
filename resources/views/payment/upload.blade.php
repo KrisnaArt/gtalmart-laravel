@@ -32,7 +32,8 @@
 
 <body>
     @include('partials.header')
-    <div class="container-fluid">
+    <br>
+    <div class="container">
         <form method="post" action="/uploadPayment" enctype="multipart/form-data">
             @csrf
             <div class="card shadow mb-4">

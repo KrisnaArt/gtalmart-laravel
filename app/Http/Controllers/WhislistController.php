@@ -51,12 +51,12 @@ class WhislistController extends Controller
 
             request()->session()->flash('suscess', 'cart added');
 
-            return redirect('/whistlist');
+            return redirect('/whislists');
         }else{
             
             request()->session()->flash('gagal', 'barang sudah ditambahkan');
 
-            return redirect('/whistlist');
+            return redirect('/whislists');
         }
     }
 
@@ -103,6 +103,6 @@ class WhislistController extends Controller
     public function destroy(Whislist $whislist)
     {
         Whislist::destroy($whislist->id);
-        return redirect('/whislists')->with('suscess', 'product adeleted');
+        return redirect('/products')->with('suscess', 'product deleted');
     }
 }

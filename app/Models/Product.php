@@ -62,9 +62,12 @@ class Product extends Model
             return $query->where('name', 'like', '%'.$search.'%');
         });
 
-        $query->when(isset($filters['min']) || isset($filters['max']) ?? false, function ($query, $min, $max)
+        $query->when($filters['min'] ?? false, function ($query, $min)
         {
-            return $query->whereBetween('price',[$min,$max]);
+            return $query->where('price','>=',$min);
+        })->when($filters['max'] ?? false, function ($query, $max)
+        {
+            return $query->where('price','<=',$max);
         });
     }
 }

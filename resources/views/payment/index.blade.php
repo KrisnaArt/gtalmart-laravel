@@ -69,7 +69,7 @@
             <form action="/payment" method="post">
                 @csrf
                 <input type="hidden" class="form-control" id="cart" name="cart" placeholder="cart"
-                    value="{{ $cart->id }}">
+                    value="{{ $cart }}">
                 <hr class="mb-4">
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Sudah Transfer</button>
             </form>

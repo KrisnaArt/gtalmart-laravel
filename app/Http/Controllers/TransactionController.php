@@ -97,12 +97,16 @@ class TransactionController extends Controller
 
         request()->session()->flash('Berhasil', 'barang sudah ditambahkan');
 
-        return redirect('/payment')->with(['cart'=>$request->cart]);
+        $cart = $request->cart;
+
+        $this->payment($cart);
+
+        return redirect('/payment');
     }
 
-    public function payment(Request $request)
+    public function payment($cart)
     {
-        Cart::destroy($request->cart);
+        Cart::destroy($cart);
         return redirect('/uploadPayment')->with('suscess','product adeleted');
     }
 

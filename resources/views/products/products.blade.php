@@ -50,14 +50,13 @@
                                 <h3>Range Harga</h3>
                             </div>
                             <div class="widget-content shop-by-price">
-                                <form method="post" action="{{ URL::current() }}">
-                                    @csrf
+                                <form action="{{ URL::current() }}">
                                     <div class="row col-12">
                                         <input type="text" id="min" name="min" placeholder="Min" size="2"
-                                            class="mb-3" />
+                                            class="mb-3"/>
                                         <label> - </label>
                                         <input type="text" id="max" name="max" placeholder="Max" size="2"
-                                            class="mb-3" />
+                                            class="mb-3"/>
                                         <button type="submit" onchange="this.form.submit()">Filter</button>
                                     </div>
                                 </form>
@@ -85,7 +84,7 @@
                         <div class="col-12">
                             <div class="products-top">
                                 <div class="products-top-inner">
-                                    @if (request(['search']) != null)
+                                    @if (request(['search']) != null || request(['min','max']) != null)
                                         <div class="products-found">
                                             <p><span>{{ $product_found }}</span> products found </p>
                                         </div>
@@ -93,8 +92,7 @@
 
                                     @endif
                                     <div class="products-sort">
-                                        <form method="post" action="{{ URL::current() }}">
-                                            @csrf
+                                        <form action="{{ URL::current() }}">
                                             <span>Sort By : </span>
                                             <select name="sort" id="sort" onchange="this.form.submit()">
                                                 @foreach ($sorts as $sort)

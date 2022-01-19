@@ -15,20 +15,23 @@ class ProductController extends Controller
         // ddd(request());
         if ($request['sort'] === "low-price")
             return view('products.products', [
-                'products' => Product::orderBy('price', 'asc')->paginate(6),
+                'products' => Product::filter(request(['min','max']))->orderBy('price', 'asc')->paginate(6)->withquerystring(),
                 'categories' => Category::all(),
+                'product_found' => Product::filter(request(['min','max']))->count(),
                 'sorts' => $sort
             ]);
         elseif ($request['sort'] === "high-price")
             return view('products.products', [
-                'products' => Product::orderBy('price', 'desc')->paginate(6),
+                'products' => Product::filter(request(['min','max']))->orderBy('price', 'desc')->paginate(6)->withquerystring(),
                 'categories' => Category::all(),
+                'product_found' => Product::filter(request(['min','max']))->count(),
                 'sorts' => $sort
             ]);
         else
             return view('products.products', [
-                'products' => Product::paginate(6),
+                'products' => Product::filter(request(['min','max']))->paginate(6)->withquerystring(),
                 'categories' => Category::all(),
+                'product_found' => Product::filter(request(['min','max']))->count(),
                 'sorts' => $sort
             ]);
     }
